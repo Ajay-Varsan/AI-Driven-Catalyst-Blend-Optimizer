@@ -1,0 +1,164 @@
+/* Font & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar .logo {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sidebar .info {
+  list-style: none;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  padding-left: 1rem;
+}
+
+.sidebar footer {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.sidebar a {
+  color: #c7d2fe;
+  text-decoration: underline;
+}
+
+/* Form Section */
+.form-section {
+  flex: 1;
+  padding: 3rem 4rem;
+  background: #ffffff;
+  box-shadow: inset 1px 0 0 #e5e7eb;
+}
+
+.form-section h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #1e40af;
+}
+
+.flash {
+  background: #dcfce7;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+input {
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.4rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* Button */
+button {
+  width: 180px;
+  padding: 0.75rem;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .form-section {
+    padding: 2rem;
+  }
+
+  
+}

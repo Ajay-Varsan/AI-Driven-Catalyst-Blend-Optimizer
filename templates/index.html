@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalyst Properties Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<script>
+  async function sendRequest() {
+    const body = {
+      attrition_resistance: parseFloat(document.getElementById("attrition").value),
+      thermal_stability: parseFloat(document.getElementById("thermal").value),
+      avg_particle_size: parseFloat(document.getElementById("particle").value),
+      particle_size_dist: parseFloat(document.getElementById("psd").value),
+      density: parseFloat(document.getElementById("density").value),
+      rare_earth_oxides: parseFloat(document.getElementById("reo").value),
+      catalyst_surface_area: parseFloat(document.getElementById("catalyst").value),
+      micropore_surface_area: parseFloat(document.getElementById("micro").value),
+      zeolite_surface_area: parseFloat(document.getElementById("zeolite").value),
+      xrf: parseFloat(document.getElementById("xrf").value),
+      cost_weight: parseFloat(document.getElementById("costweight").value) || 0.3
+    };
+
+    const res = await fetch("/blend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = JSON.stringify(data.blends, null, 2);
+  }
+</script>
+
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">🧪</div>
+      <h2>AI‑ternative</h2>
+      <p>AI-powered assistant for chemical formulation. Enter your catalyst properties for fast, accurate blend recommendations.</p>
+      <ul class="info">
+        <li><strong>Attrition:</strong> Wear resistance</li>
+        <li><strong>Thermal:</strong> Heat stability</li>
+        <li><strong>XRF:</strong> Elemental profile</li>
+      </ul>
+      <footer>Need help? <a href="#">Contact us</a></footer>
+    </aside>
+
+    <!-- Form -->
+    <main class="form-section">
+      <h1>Enter Catalyst Properties</h1>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash">{{ messages[0] }}</div>
+        {% endif %}
+      {% endwith %}
+      
+      <form onsubmit="event.preventDefault(); sendRequest();" novalidate>
+        <div class="form-grid">
+          <label>Attrition Resistance
+            <input type="number" step="any" id="attrition" required>
+          </label>
+          <label>Thermal Stability
+            <input type="number" step="any" id="thermal" required>
+          </label>
+          <label>Average Particle Size (µm)
+            <input type="number" step="any" id="particle" required>
+          </label>
+          <label>Particle Size Distribution
+            <input type="text" id="psd" required>
+          </label>
+          <label>Density (g/cm³)
+            <input type="number" step="any" id="density" required>
+          </label>
+          <label>Rare Earth Oxides (%)
+            <input type="number" step="any" id="reo" required>
+          </label>
+          <label>Catalyst Surface Area (m²/g)
+            <input type="number" step="any" id="catalyst" required>
+          </label>
+          <label>Micropore Surface Area (m²/g)
+            <input type="number" step="any" id="micro" required>
+          </label>
+          <label>Zeolite Surface Area (m²/g)
+            <input type="number" step="any" id="zeolite" required>
+          </label>
+          <label>X‑Ray Fluorescence
+            <input type="number" step="any" id="xrf" required>
+          </label>
+          <label>Cost Weight (0–1)
+            <input type="number" step="any" id="costweight" value="0.3" min="0" max="1" required>
+          </label>
+        </div>
+        <button type="submit">Generate Blend</button>
+      </form>
+
+      <pre id="result" style="margin-top: 2rem; background:#f0f0f0; padding:1rem; border-radius:8px;"></pre>
+    </main>
+  </div>
+</body>
+</html>
